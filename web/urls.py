@@ -5,5 +5,7 @@ from . import views
 app_name = 'web'
 
 urlpatterns = [
-    path('', views.index,name='index')
+     path('', views.MatriculaView.as_view(), name='index'),
+     path('editarMatricula/<id>/', views.MatriculaView.modificarMatricula, name='editarMatricula')
 ]
+

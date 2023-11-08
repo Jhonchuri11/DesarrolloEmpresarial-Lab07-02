@@ -3,41 +3,75 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Alumnos</h1>
+    <h1 class="h3 mb-2 text-gray-800">Matriculas</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Listado</h6>
         </div>
+        <div class="mt-4">
+          <form method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+              <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}"
+                aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+                </div>
+                </div>
+            </form>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Acciones</th>
+                            <th>Año académico</th>
+                            <th>Ciclo</th>
+                            <th>Fecha de matricula</th>
+                            <th>Alumno</th>
+                            <th>Apellido</th>
+                            <th>Curso</th>
+                            <th>Docente</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- LISTADO DE ALUMNOS -->
+                         {%for matri in matriculas %}
                         <tr>
-                            <td>1</td>
-                            <td>César Mayta</td>
-                            <td>cesarmayta@tecsup.edu.pe</td>
-                            <td></td>
+                            <td>{{ matri.id }}</td>
+                            <td>{{ matri.anioacademico }}</td>
+                            <td>{{ matri.ciclo }}</td>
+                            <td>{{ matri.fecha }}</td>
+                            <td>{{ matri.codigoestudiante.nombre }}</td>
+                            <td>{{ matri.codigoestudiante.apellido }}</td>
+                            <td>{{ matri.codigocurso.nombre }}</td>
+                            <td>{{ matri.codigodocente.nombre }}</td>
+                            <td>
+                                <a type="button" class="btn btn-primary edit-button" id="edit-button" href="{% url 'web:editarMatricula' matri.id %}">Editar</a>
+                            </td>
                         </tr>
-                        <!----------------------------->
+                         {% endfor %}
+                       <!----------------------------->
                     </tbody>
                 </table>
             </div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoUsuario">
-                Nuevo Alumno
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#nuevoUsuario">
+                Nueva Matricula
               </button>
         </div>
     </div>
 
 </div>
 {% endblock %}
+
+  
+  
+  
+  
+  
+  

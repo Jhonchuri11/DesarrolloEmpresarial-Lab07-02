@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+ <!-- Button trigger modal Editar -->
+ {% load crispy_forms_tags %}
+ <!-- Modal -->
+ <div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Actualización de matrícula</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Data</h6>
+      </div>
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="modal-body">
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    {{ formu|crispy }} 
+                    <button type="submit" class="btn btn-primary" id="edit-button">Guardar</button>
+                </form>
+                </div> 
+              </table>
+          </div>
+      </div>
+  </div>
+</div>   
+ {% endblock %}

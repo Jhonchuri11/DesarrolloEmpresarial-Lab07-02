@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Profesores</h1>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Listado</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- LISTADO DE PROFESORES -->
+                         {% for pro in profesores %}
+                        <tr>
+                            <td>{{ pro.profesor_id }}</td>
+                            <td>{{ pro.profesor_nombre }}</td>
+                            <td>{{ pro.profesor_email }}</td>
+                            <td>
+                                <a type="button" class="btn btn-danger" id="eliminarBtn" data-alumno-id="{{ pro.profesor_id }}">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                         {% endfor %}
+                       <!----------------------------->
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoProfesor">
+                Nuevo Profesor
+              </button>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+{% block mensaje %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('eliminarBtn').addEventListener('click', function () {
+        const profesorId = this.getAttribute('data-alumno-id');
+        Swal.fire({
+          title: '¿Estás seguro?',
+          text: 'El registro se eliminará permanentemente.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Sí, eliminar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Redirige a la vista de eliminación después de la confirmación.
+            window.location.href = `/eliminarProfesor/${profesorId}/`;
+          }
+        });
+      });
+    });
+  </script>
+{% endblock %}
